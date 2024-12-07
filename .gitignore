@@ -1,0 +1,16 @@
+# Maven target directory
+*/target/
+
+# IntelliJ IDEA and VS Code settings
+.idea/
+.vscode/
+
+# Log files
+*.log
+
+# Docker and environment files
+*.env
+docker-compose.override.yml
+
+# OS-specific files
+.DS_Store
