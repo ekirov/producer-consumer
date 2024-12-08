@@ -13,6 +13,8 @@ public class ConsumerService {
 
     @RabbitListener(queues = "requestQueue")
     public void processMessage(String message) {
+//        Thread thread = Thread.currentThread();
+//        System.out.println("Thread id: "+thread.getId());
         System.out.println("Consumer received request: " + message);
         rabbitTemplate.convertAndSend("responseQueue", "Consumer processed: " +message);
     }

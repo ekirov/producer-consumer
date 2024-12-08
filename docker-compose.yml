@@ -13,7 +13,7 @@ services:
     build:
       context: ./consumer-service
       dockerfile: Dockerfile
-    container_name: consumer-service
+    #container_name: consumer-service
     environment:
       SPRING_RABBITMQ_HOST: rabbitmq
     depends_on:

@@ -18,6 +18,7 @@ public class ProducerController {
 
     @PostMapping("/send")
     public ResponseEntity<String> sendMessage(@RequestBody String message) {
+        System.out.println("Sending message: " + message);
         rabbitTemplate.convertAndSend("requestQueue", message);
         return ResponseEntity.ok("Message sent: "+message);
     }
