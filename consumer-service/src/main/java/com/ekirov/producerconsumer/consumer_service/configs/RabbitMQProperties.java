@@ -3,6 +3,10 @@ package com.ekirov.producerconsumer.consumer_service.configs;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Config properties for RabbitMQ
+ * Binds queue names from application.properties file via ConfigurationProperties annotation
+ */
 @Configuration
 @ConfigurationProperties(prefix = "rabbitmq")
 public class RabbitMQProperties {
