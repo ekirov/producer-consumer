@@ -1,7 +1,7 @@
 package com.ekirov.producerconsumer.producer_service.controllers;
 
 import com.ekirov.producerconsumer.producer_service.services.ProducerService;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import com.ekirov.shared.Message;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +18,7 @@ public class ProducerController {
     }
 
     @PostMapping("/send")
-    public ResponseEntity<String> sendMessage(@RequestBody String message) {
+    public ResponseEntity<String> sendMessage(@RequestBody Message message) {
         producerService.sendMessage(message);
         return ResponseEntity.ok("Message sent: "+message);
     }
