@@ -32,8 +32,16 @@ public class ProducerController {
      */
     @PostMapping("/send")
     public ResponseEntity<String> sendMessage(@RequestBody Message message) {
-        producerService.sendMessage(message);
-        return ResponseEntity.ok("Message sent: "+message);
+        if(message == null || message.getMessageType() == null || message.getPayload() == null) {
+            return ResponseEntity.badRequest().body("Invalid message.");
+        }
+
+        try{
+            producerService.sendMessage(message);
+            return ResponseEntity.ok("Message sent.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error while sending message: "+e.getMessage());
+        }
     }
     
 }

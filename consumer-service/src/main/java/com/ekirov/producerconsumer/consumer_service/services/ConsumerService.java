@@ -2,6 +2,7 @@ package com.ekirov.producerconsumer.consumer_service.services;
 
 import com.ekirov.producerconsumer.consumer_service.configs.RabbitMQProperties;
 import com.ekirov.shared.Message;
+import com.ekirov.shared.ResponseMessage;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -37,10 +38,10 @@ public class ConsumerService {
         System.out.println("Consumer received request: " + message);
 
         //process the message for response by the messageType
-        String response = switch (message.getMessageType()) {
-            case TYPE_A -> "Processed TYPE_A with transaction ID: " + message.getTransactionId();
-            case TYPE_B -> "Processed TYPE_B with payload: " + message.getPayload();
-            default -> "Unknown message type for transaction ID: " + message.getTransactionId();
+        ResponseMessage response = switch (message.getMessageType()) {
+            case TYPE_A -> new ResponseMessage(message.getTransactionId(), true, "Processed TYPE_A successfully");
+            case TYPE_B -> new ResponseMessage(message.getTransactionId(), false, "Processed TYPE_B as failure");
+            default -> new ResponseMessage(message.getTransactionId(), false, "Unknown message type");
         };
 
         //send the response to RabbitMQ response queue

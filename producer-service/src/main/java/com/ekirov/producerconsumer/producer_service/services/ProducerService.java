@@ -34,9 +34,15 @@ public class ProducerService {
     public void sendMessage(Message message) {
         message.setTransactionId(UUID.randomUUID().toString());
         System.out.println("Producer sending request: " + message);
-        rabbitTemplate.convertAndSend(
-                rabbitMQProperties.getRequestQueue(),
-                message
-        );
+        try{
+            rabbitTemplate.convertAndSend(
+                    rabbitMQProperties.getRequestQueue(),
+                    message
+            );
+        } catch(Exception e){
+            System.err.println("Failed to send message to RabbitMQ: " +e.getMessage());
+            throw new RuntimeException("RabbitMQ is unavailable");
+        }
+
     }
 }
