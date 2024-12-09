@@ -16,10 +16,9 @@ public class ConsumerService {
         this.rabbitMQProperties = rabbitMQProperties;
     }
 
-    @RabbitListener(queues = "#{rabbitMQProperties.requestQueue}")
+    @RabbitListener(queues = "#{rabbitMQProperties.requestQueue}", concurrency = "3")
     public void processMessage(Message message) {
-//        Thread thread = Thread.currentThread();
-//        System.out.println("Thread id: "+thread.getId());
+        System.out.println("Thread id: "+Thread.currentThread().getId());
         System.out.println("Consumer received request: " + message);
         String response = switch (message.getMessageType()) {
             case TYPE_A -> "Processed TYPE_A with transaction ID: " + message.getTransactionId();
