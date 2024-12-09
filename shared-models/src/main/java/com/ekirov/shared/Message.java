@@ -1,12 +1,14 @@
 package com.ekirov.shared;
 
+import com.ekirov.shared.enums.MessageType;
+
 public class Message {
     private String transactionId;
-    private String messageType;
+    private MessageType messageType;
     private String payload;
 
     public Message(){}
-    public Message(String messageType, String payload) {
+    public Message(MessageType messageType, String payload) {
         this.messageType = messageType;
         this.payload = payload;
     }
@@ -17,10 +19,10 @@ public class Message {
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
-    public String getMessageType() {
+    public MessageType getMessageType() {
         return messageType;
     }
-    public void setMessageType(String messageType) {
+    public void setMessageType(MessageType messageType) {
         this.messageType = messageType;
     }
     public String getPayload() {

@@ -22,8 +22,8 @@ public class ConsumerService {
 //        System.out.println("Thread id: "+thread.getId());
         System.out.println("Consumer received request: " + message);
         String response = switch (message.getMessageType()) {
-            case "TYPE_A" -> "Processed TYPE_A with transaction ID: " + message.getTransactionId();
-            case "TYPE_B" -> "Processed TYPE_B with payload: " + message.getPayload();
+            case TYPE_A -> "Processed TYPE_A with transaction ID: " + message.getTransactionId();
+            case TYPE_B -> "Processed TYPE_B with payload: " + message.getPayload();
             default -> "Unknown message type for transaction ID: " + message.getTransactionId();
         };
         rabbitTemplate.convertAndSend(rabbitMQProperties.getResponseQueue(), response);
